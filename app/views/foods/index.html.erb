@@ -1,8 +1,9 @@
 <h1>Hello</h1>
 <% @foods.each do |food_hash| %>
-
-  <%= food_hash["ingredient"] %>
-  <%= food_hash["spice"] %>
-  <%= food_hash["measurement"] %>
+<div>
+  Ingredient:<%= food_hash["ingredient"] %>
+  Spice:<%= food_hash["spice"] %>
+  Measurement:<%= food_hash["measurement"] %>
+</div>
 <% end %>
   
