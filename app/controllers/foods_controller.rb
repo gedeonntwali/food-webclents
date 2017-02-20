@@ -1,19 +1,18 @@
 class FoodsController < ApplicationController
 
   def index
-    @foods = Unirest.get("http://localhost:3000/api/v2/foods.json").body    
+    @foods = Food.all
   end
 
   def show
-    food_hash = Unirest.get("http://localhost:3000/api/v2/foods/#{params[:id]}.json").body
-    @food = Food.new(food_hash)
+    @food = Food.find(params[:id])
   end
 
   def new
   end
 
   def create
-    @food = Unirest.post("http://localhost:3000/api/v1/employees.json", :headers => {"Accept"=> "application/json"}, :parameters => {:ingredient => params[:ingredient], :spice => params[:spice], :measurement=> params[:measurement]}).body
+    @food = Food.create(params[:ingredient], params[:spice], params[:measurement])
     redirect_to "/foods/#{@food['id']}"
   end
 
@@ -23,14 +22,13 @@ class FoodsController < ApplicationController
 
 
   def update
-    @food = Unirest.patch("http://localhost:3000/api/v2/foods/#{params[:id]}.json", :headers => {"Accept"=> "application/json"}, :parameters => {:ingredient => params[:ingredient], :spice => params[:spice], :measurement=> params[:measurement]}).body
-    render :show
+    @food = Food.update(params[:ingredient], params[:spice], params[:measurement])
+  redirect_to "/foods/#{params[:id]}"
   end
   
   def destroy
-    @food = Food.find_by(id:params[:id])
-    @food.destroy
-    render json: {message: "food deleted!!!!!"}
+    @food = Food.delete(params[:id])
+
   end
 
 end

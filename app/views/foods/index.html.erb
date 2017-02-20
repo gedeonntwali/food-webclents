@@ -1,9 +1,15 @@
-<h1>Hello</h1>
-<% @foods.each do |food_hash| %>
-<div>
-  Ingredient:<%= food_hash["ingredient"] %>
-  Spice:<%= food_hash["spice"] %>
-  Measurement:<%= food_hash["measurement"] %>
-</div>
+<h1>Foods List</h1>
+<table>
+  <tr>
+    <th> INGREDIENT</th>
+    <th> SPICE </th>
+    <th> MEASUREMENT </th>
+  </tr>
+  <% @foods.each do |food| %>
+  <tr>  
+    <td><%= food.ingredient %></td>
+    <td><%= food.spice %></td>
+    <td><%= food.measurement %></td>
+  </tr>
 <% end %>
   
